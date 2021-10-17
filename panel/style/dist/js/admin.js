@@ -58,3 +58,19 @@ function adminGiris(form_id, islem_turu) {
         });
     }
 }
+
+$('#select_all').click(function() {
+    var c = this.checked;
+    $(':checkbox').prop('checked', c);
+    if (c) {
+        console.log("Hepsi seçildi");
+    } else {
+        console.log("Seçililer kalktı")
+    }
+});
+
+function masrafEkle(form_id, islem_turu) {
+    var formData = new FormData($('#' + form_id)[0]);
+    formData.append('islem_turu', islem_turu);
+    console.log(formData);
+}

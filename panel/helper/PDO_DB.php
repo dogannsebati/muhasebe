@@ -12,7 +12,7 @@ class PDO_DB {
     $this->Host = 'localhost';
     $this->DBName = 'muhasebe';
     $this->DBUser = 'root';
-    $this->DBPassword = '******';
+    $this->DBPassword = '732284Ata';
     $this->DBPort = 3306;
     $this->Connect();
     $this->parameters = array();

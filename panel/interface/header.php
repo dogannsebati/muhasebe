@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="style/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="style/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="style/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="style/dist/css/admin.css">
+    <link rel="icon" type="image/png" href="style/resim/logo.png">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -61,37 +63,135 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="style/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <a href="index" class="brand-link">
+                <img src="style/resim/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+                <span class="brand-text font-weight-light">Muhasebe</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="style/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">Hoşgeldiniz <?= $SH->getAdminSession()['ad_soyad'] ?></a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
-                                <i class="nav-icon far fa-image"></i>
+                            <a href="index" style="background-color:green" class="nav-link">
+                                <i class="nav-icon fas fa-home"></i>
                                 <p>
-                                    Gallery
+                                    ANASAYFA
+                                    <span class="right badge badge-danger"></span>
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item menu">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-lira-sign"></i></i>
+                                <p>
+                                    GELİRLER
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="./index.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ALACAKLAR</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./index2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>SATIŞLAR</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item menu">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-lira-sign"></i>
+                                <p>
+                                    GİDERLER
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="masraflar-1" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>MASRAFLAR</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="sayfa.php?sayfa=ödemeler" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ÖDEMELER</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./index3.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>PERSONEL</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item menu">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-lira-sign"></i>
+                                <p>
+                                    NAKİT YÖNETİMİ
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-copy"></i></i>
+                                <p>
+                                    RAPORLAR
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="pages/layout/top-nav.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>SATIŞ RAPORU</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>TAHSİLAT RAPORU</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/boxed.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ÖDEME RAPORU</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>MASRAF RAPORU</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
                         <li class="nav-item">
-                            <a href="iframe.html" class="nav-link">
-                                <i class="nav-icon fas fa-ellipsis-h"></i>
-                                <p>Tabbed IFrame Plugin</p>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    ÇIKIŞ YAP
+                                </p>
                             </a>
                         </li>
                     </ul>

@@ -1,0 +1,87 @@
+.SayfalamaAlaniKapsayicisi {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 10px 0 10px 0;
+    border: 0;
+    outline: 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+.SayfalamaAlaniIciMetinAlaniKapsayicisi {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 5px 0 5px 0;
+    border: 0;
+    outline: 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+.SayfalamaAlaniIciNumaralandirmaKapsayicisi {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 5px 0 5px 0;
+    border: 0;
+    outline: 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+.Pasif {
+    display: inline-block;
+    width: auto;
+    height: 33px;
+    margin: 0px 0.5px;
+    ;
+    padding: 0;
+    padding: 5px 7.5px;
+    background: #FFFFFF;
+    border: 0;
+    border: 1px solid #DADADA;
+    outline: none;
+    color: #646464;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.Pasif a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+    color: #646464;
+}
+
+.Aktif {
+    display: inline-block;
+    width: auto;
+    height: 33px;
+    margin: 0px 0.5px;
+    ;
+    padding: 0;
+    padding: 5px 7.5px;
+    background: #F6F6F6;
+    border: 0;
+    border: 1px solid #DADADA;
+    outline: none;
+    color: #FF0000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: bold;
+    font-variant: normal;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+}
