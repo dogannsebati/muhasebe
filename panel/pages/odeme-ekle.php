@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Masraf Ekle</h1>
+                    <h1 class="m-0">Ödeme Ekle</h1>
                 </div>
 
                 <!-- /.col -->
@@ -26,33 +26,37 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <!-- form start -->
-                        <form id="masraf-ekle-form">  
+                        <form id="odeme-ekle-form">  
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="masraf_baslik">Başlık</label>
-                                    <input type="text"  class="form-control"  placeholder="Masraf başlığını giriniz" name="masraf_baslik" id="masraf_baslik">
+                                    <label for="odeme_baslik">Başlık</label>
+                                    <input type="text"  class="form-control"  placeholder="Ödeme başlığını giriniz" name="odeme_baslik" id="odeme_baslik">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_aciklama">Açıklama</label>
-                                    <input type="text" class="form-control"  placeholder="Masraf açıklama giriniz" name="masraf_aciklama" id="masraf_aciklama">
+                                    <label for="odeme_aciklama">Açıklama</label>
+                                    <input type="text" class="form-control"  placeholder="Ödeme açıklama giriniz" name="odeme_aciklama" id="odeme_aciklama">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_zaman">Zaman</label>
-                                    <input type="date" class="form-control" placeholder="Masraf tarih giriniz" name="masraf_zaman" id="masraf_zaman" >
+                                    <label for="odeme_kime">Ödeme Kime Yapılacak</label>
+                                    <input type="text" class="form-control"  placeholder="İsim giriniz" name="odeme_kime" id="odeme_kime">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_kategori">Kategori</label>
-                                    <input type="text" class="form-control" placeholder="Masraf kategori giriniz" name="masraf_kategori" id="masraf_kategori" >
+                                    <label for="odeme_zaman">Zaman</label>
+                                    <input type="date" class="form-control" placeholder="Ödeme tarih giriniz" name="odeme_zaman" id="odeme_zaman" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_tutar">Tutar</label>
-                                    <input type="text" class="form-control" placeholder="Masraf tutar giriniz" name="masraf_tutar" id="masraf_tutar" >
+                                    <label for="odeme_tutar">Tutar</label>
+                                    <input type="text" class="form-control" placeholder="Ödeme tutar giriniz" name="odeme_tutar" id="odeme_tutar" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="para_alinan_zaman">Alınan Zaman</label>
+                                    <input type="date" class="form-control" placeholder="Ödeme tarih giriniz" name="para_alinan_zaman" id="para_alinan_zaman" >
                                 </div>
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button class="btn btn-primary" onclick="masrafEkle('masraf-ekle-form','masraf-ekle');return false;">Ekle</button>
+                                <button class="btn btn-primary" onclick="odemeEkle('odeme-ekle-form','odeme-ekle');return false;">Ekle</button>
                             </div>
                         </form>
                     </div>

@@ -10,4 +10,7 @@ RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^(.*)$ $1.html [NC,L]
 
 RewriteRule ^masraflar-([0-9]+)$ index.php?page=masraflar&sayfa=$1 [NC]
+RewriteRule ^odemeler-([0-9]+)$ index.php?page=odemeler&sayfa=$1 [NC]
+RewriteRule ^masraf-duzenle-([0-9]+)$ index.php?page=masraf-duzenle&id=$1 [NC]
+RewriteRule ^odeme-duzenle-([0-9]+)$ index.php?page=odeme-duzenle&id=$1 [NC]
 RewriteRule ^masraf-ekle$ index.php?page=masraf-ekle[NC]
