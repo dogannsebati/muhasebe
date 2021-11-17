@@ -2,12 +2,11 @@
 
 $id = (int) $FNC->filter($_GET['id']);
 
-$sql = ('SELECT * FROM masraflar WHERE id = :id');
+$sql = ('SELECT * FROM satislar WHERE id = :id');
 $sqlValues = ['id' => $id];
-$masraf = $db->query($sql, $sqlValues);
+$satislar = $db->query($sql, $sqlValues);
 
 ?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -15,7 +14,7 @@ $masraf = $db->query($sql, $sqlValues);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Masraf Düzenle</h1>
+                    <h1 class="m-0">Satışlar Düzenle</h1>
                 </div>
 
                 <!-- /.col -->
@@ -36,34 +35,35 @@ $masraf = $db->query($sql, $sqlValues);
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <!-- form start -->
-                        <form id="masraf-duzenle-form">
-                            <input type="hidden" name="id" id="id" value="<?= $masraf[0]['id']; ?>">
+                        <form id="satis-duzenle-form">  
+                        <input type="hidden" name="id" id="id" value="<?= $satislar[0]['id']; ?>">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="masraf_baslik">Başlık</label>
-                                    <input type="text" class="form-control" placeholder="Masraf başlığını giriniz" name="masraf_baslik" id="masraf_baslik" value="<?= $masraf[0]['masraf_baslik']; ?>">
+                                    <label for="satis_baslik">Başlık</label>
+                                    <input type="text"  class="form-control"  placeholder="Satış başlık giriniz" name="satis_baslik" id="satis_baslik" value="<?= $satislar[0]['satis_baslik']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_aciklama">Açıklama</label>
-                                    <input type="text" class="form-control" placeholder="Masraf açıklama giriniz" name="masraf_aciklama" id="masraf_aciklama" value="<?= $masraf[0]['masraf_aciklama']; ?>">
+                                    <label for="satis_aciklama">Açıklama</label>
+                                    <input type="text" class="form-control"  placeholder="Satış açıklama giriniz" name="satis_aciklama" id="satis_aciklama" value="<?= $satislar[0]['satis_aciklama']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_zaman">Zaman</label>
-                                    <input type="date" class="form-control" placeholder="Masraf tarih giriniz" name="masraf_zaman" id="masraf_zaman" value="<?= $masraf[0]['masraf_zaman']; ?>">
+                                    <label for="satis_zaman">Zaman</label>
+                                    <input type="date" class="form-control" placeholder="Satış zamanı giriniz" name="satis_zaman" id="satis_zaman" value="<?= $satislar[0]['satis_zaman']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_kategori">Kategori</label>
-                                    <input type="text" class="form-control" placeholder="Masraf kategori giriniz" name="masraf_kategori" id="masraf_kategori" value="<?= $masraf[0]['masraf_kategori']; ?>">
+                                    <label for="satis_tutar">Tutar</label>
+                                    <input type="text" class="form-control" placeholder="Satış tutar giriniz" name="satis_tutar" id="satis_tutar" value="<?= $satislar[0]['satis_tutar']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_tutar">Tutar</label>
-                                    <input type="text" class="form-control" placeholder="Masraf tutar giriniz" name="masraf_tutar" id="masraf_tutar" value="<?= $masraf[0]['masraf_tutar']; ?>">
+                                    <label for="satis_odeme">Ödeme</label>
+                                    <input type="text" class="form-control" placeholder="Satış ödeme giriniz" name="satis_odeme" id="satis_odeme" value="<?= $satislar[0]['satis_odeme']; ?>">
                                 </div>
+                                
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button class="btn btn-primary" onclick="masrafDuzenle('masraf-duzenle-form','masraf-duzenle');return false;">Düzenle</button>
+                            <button class="btn btn-primary" onclick="satisDuzenleme('satis-duzenle-form','satis-duzenle');return false;">Düzenle</button>
                             </div>
                         </form>
                     </div>

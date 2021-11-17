@@ -252,3 +252,441 @@ if ($action == 'odeme-duzenle') {
         }
     }
 }
+
+if ($action == 'personel-ekle') {
+    $calisan_isim = $FNC->filter($_POST['calisan_isim']); //telefon aldım
+    $calisan_yas = $FNC->filter($_POST['calisan_yas']);
+    $calisan_bolum = $FNC->filter($_POST['calisan_bolum']);
+    $calisan_maas = $FNC->filter($_POST['calisan_maas']);
+    $ise_baslama_tarih = $FNC->filter($_POST['ise_baslama_tarih']);
+   
+
+    if ($calisan_isim == null || $calisan_isim == "") {
+        $FNC->sendResult(false, 'Personel isim boş olamaz !');
+    } else if ($calisan_yas == null || $calisan_yas == "") {
+        $FNC->sendResult(false, 'Personel yaş boş olamaz !');
+    } else if ($calisan_bolum == null || $calisan_bolum == "") {
+        $FNC->sendResult(false, 'Personel Bölümü boş olamaz !');
+    } else if ($ise_baslama_tarih == null || $ise_baslama_tarih == "") {
+        $FNC->sendResult(false, 'Personel Başlama boş olamaz !');
+    }else if ($calisan_maas == null || $calisan_maas == "") {
+        $FNC->sendResult(false, 'Personel Maaş boş olamaz !');
+    }  else {
+        $sql = ('INSERT INTO personel SET
+        calisan_isim      = :calisan_isim,
+        calisan_yas    = :calisan_yas,
+        calisan_bolum      = :calisan_bolum,
+        calisan_maas      = :calisan_maas,
+        ise_baslama_tarih    = :ise_baslama_tarih');
+
+        $sqlValues = ['calisan_isim' => $calisan_isim, 'calisan_yas' => $calisan_yas, 'calisan_bolum' => $calisan_bolum, 'calisan_maas' => $calisan_maas, 'ise_baslama_tarih' => $ise_baslama_tarih]; //telefon aldım 
+        $kontrol = $db->query($sql, $sqlValues);
+        if ($kontrol) {
+            $FNC->sendResult(true, 'Personel eklendi!');
+        } else {
+            $FNC->sendResult(false, 'Personel ekleme hata !');
+        }
+    }
+}
+
+if ($action == 'personel-sil') {
+    if ($_POST['id'] <= 0) {
+        $FNC->sendResult(false, 'Id sıfırdan küçük ya da eşit olamaz');
+    }
+    $sql = ('DELETE FROM personel WHERE id = :id');
+    $sqlValues = ['id' => (int) $FNC->filter($_POST['id'])];
+    $kontrol = $db->query($sql, $sqlValues);
+    if ($kontrol) {
+        $FNC->sendResult(true, 'Personel başarıyla silindi');
+    } else {
+        $FNC->sendResult(false, 'Personel silme hata !');
+    }
+}
+
+
+if ($action == 'personel-duzenle') {
+    $id = (int)$FNC->filter($_POST['id']);
+    $calisan_isim = $FNC->filter($_POST['calisan_isim']); //telefon aldım
+    $calisan_yas = $FNC->filter($_POST['calisan_yas']);
+    $calisan_bolum = $FNC->filter($_POST['calisan_bolum']);
+    $calisan_maas = $FNC->filter($_POST['calisan_maas']);
+    $ise_baslama_tarih = $FNC->filter($_POST['ise_baslama_tarih']);
+   
+
+    if ($id <= 0) {
+        $FNC->sendResult(false, 'Id sıfırdan küçük ya da eşit olamaz');
+    }else if ($calisan_isim == null || $calisan_isim == "") {
+        $FNC->sendResult(false, 'Personel isim boş olamaz !');
+    } else if ($calisan_yas == null || $calisan_yas == "") {
+        $FNC->sendResult(false, 'Personel yaş boş olamaz !');
+    } else if ($calisan_bolum == null || $calisan_bolum == "") {
+        $FNC->sendResult(false, 'Personel Bölümü boş olamaz !');
+    } else if ($ise_baslama_tarih == null || $ise_baslama_tarih == "") {
+        $FNC->sendResult(false, 'Personel Başlama boş olamaz !');
+    }else if ($calisan_maas == null || $calisan_maas == "") {
+        $FNC->sendResult(false, 'Personel Maaş boş olamaz !');
+    }  else {
+        $sql = ('UPDATE personel SET
+        calisan_isim      = :calisan_isim,
+        calisan_yas    = :calisan_yas,
+        calisan_bolum      = :calisan_bolum,
+        calisan_maas      = :calisan_maas,
+        ise_baslama_tarih    = :ise_baslama_tarih WHERE id = :id');
+
+        $sqlValues = ['calisan_isim' => $calisan_isim, 'calisan_yas' => $calisan_yas, 'calisan_bolum' => $calisan_bolum, 'calisan_maas' => $calisan_maas, 'ise_baslama_tarih' => $ise_baslama_tarih,'id' => $id]; //telefon aldım 
+        $kontrol = $db->query($sql, $sqlValues);
+        if ($kontrol) {
+            $FNC->sendResult(true, 'Personel düzenlendi!');
+        } else {
+            $FNC->sendResult(false, 'Personel düzenleme hata !');
+        }
+    }
+}
+
+if ($action == 'personel-toplu-sil') {
+    $say = 0;
+    if (isset($_POST['personeller'])) {
+        $idler = $_POST['personeller'];
+        foreach ($idler as $id) {
+            $sql = ('DELETE FROM personel WHERE id = :id');
+            $sqlValues = ['id' => $id];
+            $kontrol = $db->query($sql, $sqlValues);
+            if ($kontrol) {
+                $say = $say + 1;
+            }
+        }
+        if ($say == count($idler)) {
+            $FNC->sendResult(true, 'Personel başarıyla silindi');
+        } else {
+            $FNC->sendResult(true, 'Personel toplu silme hata #1');
+        }
+    } else {
+        $FNC->sendResult(true, 'Personel toplu silme hata #2');
+    }
+}
+
+
+if ($action == 'alacak-ekle') {
+    $alacak_isim = $FNC->filter($_POST['alacak_isim']); //telefon aldım
+    $alacak_aciklama = $FNC->filter($_POST['alacak_aciklama']);
+    $alacak_tutar = $FNC->filter($_POST['alacak_tutar']);
+    $alacak_zaman = $FNC->filter($_POST['alacak_zaman']);
+   
+
+    if ($alacak_isim == null || $alacak_isim == "") {
+        $FNC->sendResult(false, 'Alacak isim boş olamaz !');
+    } else if ($alacak_aciklama == null || $alacak_aciklama == "") {
+        $FNC->sendResult(false, 'Açıklama boş olamaz !');
+    } else if ($alacak_tutar == null || $alacak_tutar == "") {
+        $FNC->sendResult(false, 'Tutar boş olamaz !');
+    } else if ($alacak_zaman == null || $alacak_zaman == "") {
+        $FNC->sendResult(false, 'Zaman boş olamaz !');
+    }  else {
+        $sql = ('INSERT INTO alacaklar SET
+        alacak_isim      = :alacak_isim,
+        alacak_aciklama    = :alacak_aciklama,
+        alacak_tutar      = :alacak_tutar,
+        alacak_zaman      = :alacak_zaman');
+
+        $sqlValues = ['alacak_isim' => $alacak_isim, 'alacak_aciklama' => $alacak_aciklama, 'alacak_tutar' => $alacak_tutar, 'alacak_zaman' => $alacak_zaman]; //telefon aldım 
+        $kontrol = $db->query($sql, $sqlValues);
+        if ($kontrol) {
+            $FNC->sendResult(true, 'Alacak eklendi!');
+        } else {
+            $FNC->sendResult(false, 'Alacak ekleme hata !');
+        }
+    }
+}
+if ($action == 'alacak-duzenle') {
+    $id = (int)$FNC->filter($_POST['id']);
+    $alacak_isim = $FNC->filter($_POST['alacak_isim']); //telefon aldım
+    $alacak_aciklama = $FNC->filter($_POST['alacak_aciklama']);
+    $alacak_tutar = $FNC->filter($_POST['alacak_tutar']);
+    $alacak_zaman = $FNC->filter($_POST['alacak_zaman']);
+    
+   
+
+    if ($id <= 0) {
+        $FNC->sendResult(false, 'Id sıfırdan küçük ya da eşit olamaz');
+    }else if ($alacak_isim == null || $alacak_isim == "") {
+        $FNC->sendResult(false, 'Alacak isim boş olamaz !');
+    } else if ($alacak_aciklama == null || $alacak_aciklama == "") {
+        $FNC->sendResult(false, 'Alacak açıklama yaş boş olamaz !');
+    } else if ($alacak_tutar == null || $alacak_tutar == "") {
+        $FNC->sendResult(false, 'Alacak tutar boş olamaz !');
+    } else if ($alacak_zaman == null || $alacak_zaman == "") {
+        $FNC->sendResult(false, 'Alacak zamanı boş olamaz !');
+
+    }  else {
+        $sql = ('UPDATE alacaklar SET
+        alacak_isim      = :alacak_isim,
+        alacak_aciklama    = :alacak_aciklama,
+        alacak_tutar      = :alacak_tutar,
+        alacak_zaman      = :alacak_zaman WHERE id = :id');
+
+        $sqlValues = ['alacak_isim' => $alacak_isim, 'alacak_aciklama' => $alacak_aciklama, 'alacak_tutar' => $alacak_tutar, 'alacak_zaman' => $alacak_zaman,'id' => $id]; //telefon aldım 
+        $kontrol = $db->query($sql, $sqlValues);
+        if ($kontrol) {
+            $FNC->sendResult(true, 'Alacak düzenlendi!');
+        } else {
+            $FNC->sendResult(false, 'Alacak düzenleme hata !');
+        }
+    }
+}
+
+if ($action == 'alacak-sil') {
+    if ($_POST['id'] <= 0) {
+        $FNC->sendResult(false, 'Id sıfırdan küçük ya da eşit olamaz');
+    }
+    $sql = ('DELETE FROM alacaklar WHERE id = :id');
+    $sqlValues = ['id' => (int) $FNC->filter($_POST['id'])];
+    $kontrol = $db->query($sql, $sqlValues);
+    if ($kontrol) {
+        $FNC->sendResult(true, 'Alacak başarıyla silindi');
+    } else {
+        $FNC->sendResult(false, 'Alacak silme hata !');
+    }
+}
+if ($action == 'alacak-toplu-sil') {
+    $say = 0;
+    if (isset($_POST['alacaklar'])) {
+        $idler = $_POST['alacaklar'];
+        foreach ($idler as $id) {
+            $sql = ('DELETE FROM alacaklar WHERE id = :id');
+            $sqlValues = ['id' => $id];
+            $kontrol = $db->query($sql, $sqlValues);
+            if ($kontrol) {
+                $say = $say + 1;
+            }
+        }
+        if ($say == count($idler)) {
+            $FNC->sendResult(true, 'Alacaklar başarıyla silindi');
+        } else {
+            $FNC->sendResult(true, 'Alacaklar toplu silme hata #1');
+        }
+    } else {
+        $FNC->sendResult(true, 'Alacakar toplu silme hata #2');
+    }
+}
+
+if($action == "satis-ekle"){
+    $satis_baslik = $FNC->filter($_POST['satis_baslik']);
+    $satis_aciklama = $FNC->filter($_POST['satis_aciklama']);
+    $satis_tutar = $FNC->filter($_POST['satis_tutar']);
+    $satis_zaman = $FNC->filter($_POST['satis_zaman']);
+    $satis_odeme = $FNC->filter($_POST['satis_odeme']);
+
+    if ($satis_baslik == null || $satis_baslik == "") {
+        $FNC->sendResult(false, 'Başlık boş olamaz !');
+    } else if ($satis_aciklama == null || $satis_aciklama == "") {
+        $FNC->sendResult(false, 'Açıklama boş olamaz !');
+    } else if ($satis_tutar == null || $satis_tutar == "") {
+        $FNC->sendResult(false, 'Tutar boş olamaz !');
+    } else if ($satis_zaman == null || $satis_zaman == "") {
+        $FNC->sendResult(false, 'Zaman boş olamaz !');
+    } else if ($satis_odeme == null || $satis_odeme == "") {
+        $FNC->sendResult(false, 'Ödeme boş olamaz !');
+    }  else {
+        $sql = ('INSERT INTO satislar SET
+        satis_baslik      = :satis_baslik,
+        satis_aciklama    = :satis_aciklama,
+        satis_tutar      = :satis_tutar,
+        satis_zaman      = :satis_zaman,
+        satis_odeme      = :satis_odeme ');
+
+        $sqlValues = ['satis_baslik' => $satis_baslik, 'satis_aciklama' => $satis_aciklama, 'satis_tutar' => $satis_tutar, 'satis_zaman' => $satis_zaman, 'satis_odeme' => $satis_odeme]; //telefon aldım 
+        $kontrol = $db->query($sql, $sqlValues);
+        if ($kontrol) {
+            $FNC->sendResult(true, 'Satış eklendi!');
+        } else {
+            $FNC->sendResult(false, 'Satış ekleme hata !');
+        }
+    }
+}
+
+if ($action == 'satis-sil') {
+    if ($_POST['id'] <= 0) {
+        $FNC->sendResult(false, 'Id sıfırdan küçük ya da eşit olamaz');
+    }
+    $sql = ('DELETE FROM satislar WHERE id = :id');
+    $sqlValues = ['id' => (int) $FNC->filter($_POST['id'])];
+    $kontrol = $db->query($sql, $sqlValues);
+    if ($kontrol) {
+        $FNC->sendResult(true, 'Satış başarıyla silindi');
+    } else {
+        $FNC->sendResult(false, 'Satış silme hata !');
+    }
+}
+
+
+if($action == "satis-duzenle"){
+    $id = (int)$FNC->filter($_POST['id']);
+    $satis_baslik = $FNC->filter($_POST['satis_baslik']);
+    $satis_aciklama = $FNC->filter($_POST['satis_aciklama']);
+    $satis_tutar = $FNC->filter($_POST['satis_tutar']);
+    $satis_zaman = $FNC->filter($_POST['satis_zaman']);
+    $satis_odeme = $FNC->filter($_POST['satis_odeme']);
+
+    if ($id <= 0) {
+        $FNC->sendResult(false, 'Id sıfırdan küçük ya da eşit olamaz');
+    }else if ($satis_baslik == null || $satis_baslik == "") {
+        $FNC->sendResult(false, 'Başlık boş olamaz !');
+    } else if ($satis_aciklama == null || $satis_aciklama == "") {
+        $FNC->sendResult(false, 'Açıklama boş olamaz !');
+    } else if ($satis_tutar == null || $satis_tutar == "") {
+        $FNC->sendResult(false, 'Tutar boş olamaz !');
+    } else if ($satis_zaman == null || $satis_zaman == "") {
+        $FNC->sendResult(false, 'Zaman boş olamaz !');
+    } else if ($satis_odeme == null || $satis_odeme == "") {
+        $FNC->sendResult(false, 'Ödeme boş olamaz !');
+    }  else {
+        $sql = ('UPDATE satislar SET
+        satis_baslik      = :satis_baslik,
+        satis_aciklama    = :satis_aciklama,
+        satis_tutar      = :satis_tutar,
+        satis_zaman      = :satis_zaman,
+        satis_odeme      = :satis_odeme WHERE id = :id ');
+
+        $sqlValues = ['satis_baslik' => $satis_baslik, 'satis_aciklama' => $satis_aciklama, 'satis_tutar' => $satis_tutar, 'satis_zaman' => $satis_zaman, 'satis_odeme' => $satis_odeme, 'id' => $id]; //telefon aldım 
+        $kontrol = $db->query($sql, $sqlValues);
+        if ($kontrol) {
+            $FNC->sendResult(true, 'Satış düzenlendi!');
+        } else {
+            $FNC->sendResult(false, 'Satış düzenleme hata !');
+        }
+    }
+}
+
+if ($action == 'satis-toplu-sil') {
+    $say = 0;
+    if (isset($_POST['satislar'])) {
+        $idler = $_POST['satislar'];
+        foreach ($idler as $id) {
+            $sql = ('DELETE FROM satislar WHERE id = :id');
+            $sqlValues = ['id' => $id];
+            $kontrol = $db->query($sql, $sqlValues);
+            if ($kontrol) {
+                $say = $say + 1;
+            }
+        }
+        if ($say == count($idler)) {
+            $FNC->sendResult(true, 'Satışlar başarıyla silindi');
+        } else {
+            $FNC->sendResult(true, 'Satışlar toplu silme hata #1');
+        }
+    } else {
+        $FNC->sendResult(true, 'Satışlar toplu silme hata #2');
+    }
+}
+
+
+if($action == "nakit-ekle"){
+    $para_baslik = $FNC->filter($_POST['para_baslik']);
+    $para_aciklama = $FNC->filter($_POST['para_aciklama']);
+    $para_gelen = $FNC->filter($_POST['para_gelen']);
+    $para_giden = $FNC->filter($_POST['para_giden']);
+    $para_zaman = $FNC->filter($_POST['para_zaman']);
+
+    if ($para_baslik == null || $para_baslik == "") {
+        $FNC->sendResult(false, 'Başlık boş olamaz !');
+    } else if ($para_aciklama == null || $para_aciklama == "") {
+        $FNC->sendResult(false, 'Açıklama boş olamaz !');
+    } else if ($para_gelen == null || $para_gelen == "") {
+        $FNC->sendResult(false, 'Gelen Tutar boş olamaz !');
+    } else if ($para_giden == null || $para_giden == "") {
+        $FNC->sendResult(false, 'Giden Tutar olamaz !');
+    } else if ($para_zaman == null || $para_zaman == "") {
+        $FNC->sendResult(false, 'Zaman boş olamaz !');
+    }  else {
+        $sql = ('INSERT INTO nakit SET
+        para_baslik      = :para_baslik,
+        para_aciklama    = :para_aciklama,
+        para_gelen      = :para_gelen,
+        para_giden      = :para_giden,
+        para_zaman      = :para_zaman ');
+
+        $sqlValues = ['para_baslik' => $para_baslik, 'para_aciklama' => $para_aciklama, 'para_gelen' => $para_gelen, 'para_giden' => $para_giden, 'para_zaman' => $para_zaman]; //telefon aldım 
+        $kontrol = $db->query($sql, $sqlValues);
+        if ($kontrol) {
+            $FNC->sendResult(true, 'Nakit eklendi!');
+        } else {
+            $FNC->sendResult(false, 'Nakit ekleme hata !');
+        }
+    }
+}
+
+
+if($action == "nakit-duzenle"){
+    $id = (int)$FNC->filter($_POST['id']);
+    $para_baslik = $FNC->filter($_POST['para_baslik']);
+    $para_aciklama = $FNC->filter($_POST['para_aciklama']);
+    $para_gelen = $FNC->filter($_POST['para_gelen']);
+    $para_giden = $FNC->filter($_POST['para_giden']);
+    $para_zaman = $FNC->filter($_POST['para_zaman']);
+
+    if ($id <= 0) {
+        $FNC->sendResult(false, 'Id sıfırdan küçük ya da eşit olamaz');
+    }else if ($para_baslik == null || $para_baslik == "") {
+        $FNC->sendResult(false, 'Başlık boş olamaz !');
+    } else if ($para_aciklama == null || $para_aciklama == "") {
+        $FNC->sendResult(false, 'Açıklama boş olamaz !');
+    } else if ($para_gelen == null || $para_gelen == "") {
+        $FNC->sendResult(false, 'Gelen Tutar boş olamaz !');
+    } else if ($para_giden == null || $para_giden == "") {
+        $FNC->sendResult(false, 'Giden Tutar olamaz !');
+    } else if ($para_zaman == null || $para_zaman == "") {
+        $FNC->sendResult(false, 'Zaman boş olamaz !');
+    }  else {
+        $sql = ('UPDATE nakit SET
+        para_baslik      = :para_baslik,
+        para_aciklama    = :para_aciklama,
+        para_gelen      = :para_gelen,
+        para_giden      = :para_giden,
+        para_zaman      = :para_zaman WHERE id = :id ');
+
+        $sqlValues = ['para_baslik' => $para_baslik, 'para_aciklama' => $para_aciklama, 'para_gelen' => $para_gelen, 'para_giden' => $para_giden, 'para_zaman' => $para_zaman,'id' => $id]; //telefon aldım 
+        $kontrol = $db->query($sql, $sqlValues);
+        if ($kontrol) {
+            $FNC->sendResult(true, 'Nakit düzenlendi!');
+        } else {
+            $FNC->sendResult(false, 'Nakit düzenleme hata !');
+        }
+    }
+}
+
+
+if ($action == 'nakit-toplu-sil') {
+    $say = 0;
+    if (isset($_POST['nakitler'])) {
+        $idler = $_POST['nakitler'];
+        foreach ($idler as $id) {
+            $sql = ('DELETE FROM nakit WHERE id = :id');
+            $sqlValues = ['id' => $id];
+            $kontrol = $db->query($sql, $sqlValues);
+            if ($kontrol) {
+                $say = $say + 1;
+            }
+        }
+        if ($say == count($idler)) {
+            $FNC->sendResult(true, 'Nakitler başarıyla silindi');
+        } else {
+            $FNC->sendResult(true, 'Nakitler toplu silme hata #1');
+        }
+    } else {
+        $FNC->sendResult(true, 'Nakitler toplu silme hata #2');
+    }
+}
+
+if ($action == 'nakit-sil') {
+    if ($_POST['id'] <= 0) {
+        $FNC->sendResult(false, 'Id sıfırdan küçük ya da eşit olamaz');
+    }
+    $sql = ('DELETE FROM nakit WHERE id = :id');
+    $sqlValues = ['id' => (int) $FNC->filter($_POST['id'])];
+    $kontrol = $db->query($sql, $sqlValues);
+    if ($kontrol) {
+        $FNC->sendResult(true, 'Nakit başarıyla silindi');
+    } else {
+        $FNC->sendResult(false, 'Nakit silme hata !');
+    }
+}

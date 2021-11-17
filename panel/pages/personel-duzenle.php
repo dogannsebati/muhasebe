@@ -2,12 +2,11 @@
 
 $id = (int) $FNC->filter($_GET['id']);
 
-$sql = ('SELECT * FROM masraflar WHERE id = :id');
+$sql = ('SELECT * FROM personel WHERE id = :id');
 $sqlValues = ['id' => $id];
-$masraf = $db->query($sql, $sqlValues);
+$personel = $db->query($sql, $sqlValues);
 
 ?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -15,7 +14,7 @@ $masraf = $db->query($sql, $sqlValues);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Masraf Düzenle</h1>
+                    <h1 class="m-0">Personel Düzenle</h1>
                 </div>
 
                 <!-- /.col -->
@@ -36,34 +35,34 @@ $masraf = $db->query($sql, $sqlValues);
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <!-- form start -->
-                        <form id="masraf-duzenle-form">
-                            <input type="hidden" name="id" id="id" value="<?= $masraf[0]['id']; ?>">
+                        <form id="personel-duzenle-form">  
+                        <input type="hidden" name="id" id="id" value="<?= $personel[0]['id']; ?>">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="masraf_baslik">Başlık</label>
-                                    <input type="text" class="form-control" placeholder="Masraf başlığını giriniz" name="masraf_baslik" id="masraf_baslik" value="<?= $masraf[0]['masraf_baslik']; ?>">
+                                    <label for="calisan_isim">Ad Soyad</label>
+                                    <input type="text"  class="form-control"  placeholder="Çalışan isim soyisim giriniz" name="calisan_isim" id="calisan_isim" value="<?= $personel[0]['calisan_isim']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_aciklama">Açıklama</label>
-                                    <input type="text" class="form-control" placeholder="Masraf açıklama giriniz" name="masraf_aciklama" id="masraf_aciklama" value="<?= $masraf[0]['masraf_aciklama']; ?>">
+                                    <label for="calisan_yas">Yaş</label>
+                                    <input type="text" class="form-control"  placeholder="Çalışanın yaşını giriniz" name="calisan_yas" id="calisan_yas" value="<?= $personel[0]['calisan_yas']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_zaman">Zaman</label>
-                                    <input type="date" class="form-control" placeholder="Masraf tarih giriniz" name="masraf_zaman" id="masraf_zaman" value="<?= $masraf[0]['masraf_zaman']; ?>">
+                                    <label for="calisan_bolum">Bölüm</label>
+                                    <input type="text" class="form-control" placeholder="Çalışanın bölümünü giriniz" name="calisan_bolum" id="calisan_bolum" value="<?= $personel[0]['calisan_bolum']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_kategori">Kategori</label>
-                                    <input type="text" class="form-control" placeholder="Masraf kategori giriniz" name="masraf_kategori" id="masraf_kategori" value="<?= $masraf[0]['masraf_kategori']; ?>">
+                                    <label for="calisan_maas">Maaş</label>
+                                    <input type="text" class="form-control" placeholder="Çalışan maaş giriniz" name="calisan_maas" id="calisan_maas" value="<?= $personel[0]['calisan_maas']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="masraf_tutar">Tutar</label>
-                                    <input type="text" class="form-control" placeholder="Masraf tutar giriniz" name="masraf_tutar" id="masraf_tutar" value="<?= $masraf[0]['masraf_tutar']; ?>">
+                                    <label for="ise_baslama_tarih">İşe Başlama Tarihi</label>
+                                    <input type="date" class="form-control" name="ise_baslama_tarih" id="ise_baslama_tarih" value="<?= $personel[0]['ise_baslama_tarih']; ?>">
                                 </div>
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button class="btn btn-primary" onclick="masrafDuzenle('masraf-duzenle-form','masraf-duzenle');return false;">Düzenle</button>
+                            <button class="btn btn-primary" onclick="personelDuzenle('personel-duzenle-form','personel-duzenle');return false;">Düzenle</button>
                             </div>
                         </form>
                     </div>
